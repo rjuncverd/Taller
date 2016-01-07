@@ -7,6 +7,7 @@
 from gi.repository import Gtk
 
 from conexion import bd
+import imprimir
 
 import clientes
 
@@ -63,6 +64,7 @@ class main:
         self.trewVentas = b.get_object("trewVentas")
         self.listaVentas = b.get_object("listVentas")
         self.menubar = b.get_object("menubar")
+        self.btnImprimr = b.get_object("bntImprimir")
          
         
         self.ventanaPrincipal.show()
@@ -91,7 +93,8 @@ class main:
             "on_ventanaVentas_destroy": self.on_ventanaVentas_destroy,
             "on_btnSalirven_delete_event": self.on_btnSalirven_delete_event,
             "on_btnGrabarven_clicked": self.on_btnGrabarven_clicked,
-            "on_imagemenuitem5_activate": self.on_imagemenuitem5_activate
+            "on_imagemenuitem5_activate": self.on_imagemenuitem5_activate,
+            "on_btnImprimir_clicked":self.on_btnImprimir_clicked,
             }
 
         b.connect_signals(dic)
@@ -226,6 +229,9 @@ class main:
             
         clientes.limpiarcli(self.dnicli, self.apelcli, self.nomcli, self.dircli, self.loccli, self.provcli, self.cpcli, self.movcli, self.telcli, self.mailcli)
         clientes.mostrar(self.listCliente, self.trewCliente)
+    
+    def on_btnImprimir_clicked(self, widget):
+        imprimir.imprimir("","","")
 
 if __name__ == "__main__":
     main = main()
