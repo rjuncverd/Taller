@@ -5,7 +5,7 @@
 # and open the template in the editor.
 # -*- coding: utf-8 -*-
 
-__author__ = "jcarlos"
+__author__ = "rjuncverd"
 __date__ = "$27-oct-2015 11:30:50$"
 
 import sqlite3

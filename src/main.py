@@ -6,7 +6,7 @@
 
 from gi.repository import Gtk
 
-from conexion import bd
+
 import imprimir
 
 import clientes
@@ -24,6 +24,7 @@ class main:
         self.ventanaNeocli = b.get_object("ventanaNeocli")
         self.ventanaTaller = b.get_object("ventanaTaller")
         self.ventanaVentas = b.get_object("ventanaVentas")
+        self.ventanaLogin = b.get_object("ventanaLogin") 
         self.btnSalircli = b.get_object("btnSalircli")
         self.btnNeocli = b.get_object("btnNeocli")
         self.btnGrabcli = b.get_object("btnGrabcli")
@@ -65,10 +66,12 @@ class main:
         self.listaVentas = b.get_object("listVentas")
         self.menubar = b.get_object("menubar")
         self.btnImprimr = b.get_object("bntImprimir")
+        self.btnAceptatLog = b.get_object("btnAceptarLog")
+        self.entUsuarioLog = b.get_object("entUsuarioLog")
+        self.entPasswordLog = b.get_object("entPasswordLog")
          
-        
-        self.ventanaPrincipal.show()
-        clientes.mostrar(self.listCliente, self.trewCliente)
+        self.ventanaLogin.show()
+       
         
 
         dic = {"on_btnNeocli_clicked": self.on_btnNeocli_clicked,
@@ -95,6 +98,8 @@ class main:
             "on_btnGrabarven_clicked": self.on_btnGrabarven_clicked,
             "on_imagemenuitem5_activate": self.on_imagemenuitem5_activate,
             "on_btnImprimir_clicked":self.on_btnImprimir_clicked,
+            "on_btnAceptarLog_clicked":self.on_btnAceptarLog_clicked,
+            "on_ventanaLogin_destroy":self.on_ventanaLogin_destroy,
             }
 
         b.connect_signals(dic)
@@ -232,6 +237,22 @@ class main:
     
     def on_btnImprimir_clicked(self, widget):
         imprimir.imprimir("","","")
+        
+    def on_btnAceptarLog_clicked(self, widget):
+        usr = self.entUsuarioLog.get_text()
+        psswd = self.entPasswordLog.get_text()
+        print usr+" "+psswd
+        if usr=="admin" and psswd=="admin":
+            self.ventanaPrincipal.show()
+            self.ventanaLogin.hide()
+            clientes.mostrar(self.listCliente, self.trewCliente)
+        else:
+            self.entUsuarioLog.set_text("")
+            self.entPasswordLog.set_text("")
+            
+    
+    def on_ventanaLogin_destroy(self,widget):
+        Gtk.main_quit()
 
 if __name__ == "__main__":
     main = main()
