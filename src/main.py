@@ -242,12 +242,12 @@ class main:
         usr = self.entUsuarioLog.get_text()
         psswd = self.entPasswordLog.get_text()
         cypher = DES.new('12345678')
-        psswdDEScrypto = cypher.encrypt(self.entUsuarioLog.get_text())
+        psswdDEScrypto = cypher.encrypt(psswd)
         print usr+" "+psswd
         print psswdDEScrypto
         print cypher.decrypt(psswdDEScrypto).strip()
         
-        if usr=="admin" and psswd=="admin":
+        if usr=="admin" and psswd=="admin123":
             self.ventanaPrincipal.show()
             self.ventanaLogin.hide()
             clientes.mostrar(self.listCliente, self.trewCliente)
